@@ -1,7 +1,7 @@
 QT += widgets network core5compat axcontainer
 
 TEMPLATE = lib
-DEFINES += MICRO_CLIENT_LIBRARY IMPORT_BROWSER WIN32_LEAN_AND_MEAN HOOK_API
+DEFINES += MICRO_CLIENT_LIBRARY IMPORT_BROWSER WIN32_LEAN_AND_MEAN
 
 CONFIG += c++17
 
@@ -16,10 +16,8 @@ HEADERS += \
     ../../Mx-Activator/src/mxpacket.h \
     ../../Mx-Activator/src/packetfile.h \
     ../../Mx-MicroClient/src/angelconfig.h \
-    ../../Mx-MicroClient/src/capture.h \
     ../../Mx-MicroClient/src/gameconfig.h \
     ../../Mx-MicroClient/src/gamehook.h \
-    ../../Mx-MicroClient/src/headerformat.h \
     ../../Mx-MicroClient/src/libmicroclient.h \
     ../../Mx-MicroClient/src/mediamute.h \
     ../../Mx-MicroClient/src/mxmicroclient.h \
@@ -33,7 +31,6 @@ HEADERS += \
     ../../Mx-MicroClient/src/widget/watcherwgt.h \
     ../../Mx-MicroClient/src/window/gamewin.h \
     ../../Mx-MicroClient/src/window/hoverwin.h \
-    ../../Mx-MicroClient/src/winsockpacket.h \
     version.h
 
 SOURCES += \
@@ -45,7 +42,6 @@ SOURCES += \
     ../../Mx-MicroClient/src/gameconfig.cpp \
     ../../Mx-MicroClient/src/mediamute.cpp \
     ../../Mx-MicroClient/src/angelconfig.cpp \
-    ../../Mx-MicroClient/src/capture.cpp \
     ../../Mx-MicroClient/src/gamehook.cpp \
     ../../Mx-MicroClient/src/mxmicroclient.cpp \
     ../../Mx-MicroClient/src/mxutils.cpp \
@@ -57,7 +53,6 @@ SOURCES += \
     ../../Mx-MicroClient/src/widget/watcherwgt.cpp \
     ../../Mx-MicroClient/src/window/gamewin.cpp \
     ../../Mx-MicroClient/src/window/hoverwin.cpp \
-    ../../Mx-MicroClient/src/winsockpacket.cpp
 
 FORMS += \
     ../../Mx-Activator/src/dialog/editor.ui \
@@ -75,7 +70,7 @@ INCLUDEPATH += \
     $$PWD/../../Mx-Browser \
     $$PWD/../../Mx-MicroClient
 
-win32 : LIBS += -lws2_32 -lshell32#-lgdi32 -lshell32 -luser32
+win32 : LIBS += -lws2_32 -lshell32 -lwininet
 
 # Default rules for deployment.
 unix: target.path = /usr/lib
@@ -85,7 +80,6 @@ RC_FILE += version.rc
 
 CONFIG(debug, debug|release) {
      #TARGET = $$join(TARGET,,,d)
-     LIBS += -lwininet
      DEFINES += DEBUG
 }
 
@@ -95,44 +89,52 @@ contains(CONFIG, msvc) {
 
 greaterThan(QT_MAJOR_VERSION, 5) {
 
-    DEFINES += KIT_QT6
+    DEFINES += KIT_QT6 HOOK_API
+
+    HEADERS += \
+        ../../Mx-MicroClient/src/dialog/description.h \
+        ../../Mx-MicroClient/src/widget/toolbarwgt.h
+
+    SOURCES += \
+        ../../Mx-MicroClient/src/dialog/description.cpp \
+        ../../Mx-MicroClient/src/widget/toolbarwgt.cpp
+
+    FORMS += \
+        ../../Mx-MicroClient/src/dialog/description.ui \
+        ../../Mx-MicroClient/src/widget/toolbarwgt.ui
 
     contains(CONFIG, msvc) {
 
-        HEADERS += \
-            ../../Mx-MicroClient/src/dialog/description.h \
-            ../../Mx-MicroClient/src/widget/toolbarwgt.h
-        HEADERS -= \
-            ../../Mx-MicroClient/src/capture.h \
-            ../../Mx-MicroClient/src/headerformat.h \
-            ../../Mx-MicroClient/src/winsockpacket.h
+        DEFINES += KIT_MSVC
 
-        SOURCES += \
-            ../../Mx-MicroClient/src/dialog/description.cpp \
-            ../../Mx-MicroClient/src/widget/toolbarwgt.cpp
-        SOURCES -= \
-            ../../Mx-MicroClient/src/capture.cpp \
-            ../../Mx-MicroClient/src/winsockpacket.cpp
-
-        FORMS += \
-            ../../Mx-MicroClient/src/dialog/description.ui \
-            ../../Mx-MicroClient/src/widget/toolbarwgt.ui
-
-        LIBS += \
-            -L$$PWD/lib/x64 -ldetours \
-            -L$$PWD/../build/Mx-Browser-Library_Qt_6_4_2_MSVC2019_64bit/release -lMx-Browser
+        LIBS += -L$$PWD/lib/x64 -ldetours
 
         CONFIG(debug, debug|release) {
-            LIBS += -L$$PWD/lib/x64/msvc_64 -lquazipd
-        } else: LIBS += -L$$PWD/lib/x64/msvc_64 -lquazip
+            LIBS += -L$$PWD/lib/x64/msvc_64 -lquazipd -L$$PWD/../build/Mx-Browser-Library_Qt_6_4_2_MSVC2019_64bit/debug -lMx-Browser
+        } else: LIBS += -L$$PWD/lib/x64/msvc_64 -lquazip -L$$PWD/../build/Mx-Browser-Library_Qt_6_4_2_MSVC2019_64bit/release -lMx-Browser
 
-    } else : DEFINES += KIT_MINGW
+    } else {
 
-    LIBS += -L$$PWD/lib/x64 -lwpcap -lpacket
+        DEFINES += KIT_MINGW
+
+        CONFIG(debug, debug|release) {
+            LIBS += -L$$PWD/lib/x64/mingw_64 -lquazipd -L$$PWD/../build/Mx-Browser-Library_Qt_6_4_2_MinGW_64_bit/debug -lMx-Browser
+        } else: LIBS += -L$$PWD/lib/x64/mingw_64 -lquazip -L$$PWD/../build/Mx-Browser-Library_Qt_6_4_2_MinGW_64_bit/release -lMx-Browser
+
+    }
 
 } else {
 
-    DEFINES += KIT_QT5
+    DEFINES += KIT_QT5 KIT_MINGW
+
+    HEADERS += \
+        ../../Mx-MicroClient/src/capture.h \
+        ../../Mx-MicroClient/src/headerformat.h \
+        ../../Mx-MicroClient/src/winsockpacket.h
+
+    SOURCES += \
+        ../../Mx-MicroClient/src/capture.cpp \
+        ../../Mx-MicroClient/src/winsockpacket.cpp
 
     LIBS += -lpsapi -L$$PWD/lib/x86 -lwpcap -lpacket
 
