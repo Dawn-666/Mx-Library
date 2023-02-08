@@ -24,6 +24,7 @@ HEADERS += \
     ../../Mx-MicroClient/src/mxutils.h \
     ../../Mx-MicroClient/src/packethandler.h \
     ../../Mx-MicroClient/src/rocokingdom.h \
+    ../../Mx-MicroClient/src/rocotimeapi.h \
     ../../Mx-MicroClient/src/version.h \
     ../../Mx-MicroClient/src/watcherclient.h \
     ../../Mx-MicroClient/src/widget/spiritframe.h \
@@ -47,6 +48,7 @@ SOURCES += \
     ../../Mx-MicroClient/src/mxutils.cpp \
     ../../Mx-MicroClient/src/packethandler.cpp \
     ../../Mx-MicroClient/src/rocokingdom.cpp \
+    ../../Mx-MicroClient/src/rocotimeapi.cpp \
     ../../Mx-MicroClient/src/watcherclient.cpp \
     ../../Mx-MicroClient/src/widget/spiritframe.cpp \
     ../../Mx-MicroClient/src/widget/statuswgt.cpp \
