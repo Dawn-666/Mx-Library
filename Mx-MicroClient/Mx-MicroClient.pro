@@ -1,4 +1,4 @@
-QT += widgets network core5compat axcontainer
+QT += widgets network core5compat axcontainer gui-private
 
 TEMPLATE = lib
 DEFINES += MICRO_CLIENT_LIBRARY IMPORT_BROWSER WIN32_LEAN_AND_MEAN
@@ -16,6 +16,7 @@ HEADERS += \
     ../../Mx-Activator/src/mxpacket.h \
     ../../Mx-Activator/src/packetfile.h \
     ../../Mx-MicroClient/src/angelconfig.h \
+    ../../Mx-MicroClient/src/appearance.h \
     ../../Mx-MicroClient/src/gameconfig.h \
     ../../Mx-MicroClient/src/gamehook.h \
     ../../Mx-MicroClient/src/libmicroclient.h \
@@ -25,6 +26,7 @@ HEADERS += \
     ../../Mx-MicroClient/src/packethandler.h \
     ../../Mx-MicroClient/src/rocokingdom.h \
     ../../Mx-MicroClient/src/rocotimeapi.h \
+    ../../Mx-MicroClient/src/thread.h \
     ../../Mx-MicroClient/src/version.h \
     ../../Mx-MicroClient/src/watcherclient.h \
     ../../Mx-MicroClient/src/widget/spiritframe.h \
@@ -40,6 +42,7 @@ SOURCES += \
     ../../Mx-Activator/src/mxfile.cpp \
     ../../Mx-Activator/src/mxpacket.cpp \
     ../../Mx-Activator/src/packetfile.cpp \
+    ../../Mx-MicroClient/src/appearance.cpp \
     ../../Mx-MicroClient/src/gameconfig.cpp \
     ../../Mx-MicroClient/src/mediamute.cpp \
     ../../Mx-MicroClient/src/angelconfig.cpp \
@@ -49,6 +52,7 @@ SOURCES += \
     ../../Mx-MicroClient/src/packethandler.cpp \
     ../../Mx-MicroClient/src/rocokingdom.cpp \
     ../../Mx-MicroClient/src/rocotimeapi.cpp \
+    ../../Mx-MicroClient/src/thread.cpp \
     ../../Mx-MicroClient/src/watcherclient.cpp \
     ../../Mx-MicroClient/src/widget/spiritframe.cpp \
     ../../Mx-MicroClient/src/widget/statuswgt.cpp \

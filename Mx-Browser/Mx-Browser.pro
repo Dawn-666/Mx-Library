@@ -14,8 +14,7 @@ SOURCES += \
     ../../Mx-Browser/src/browserutils.cpp \
     ../../Mx-Browser/src/dialog/config.cpp \
     ../../Mx-Browser/src/dialog/query.cpp \
-    ../../Mx-Browser/src/mxbrowser.cpp \
-    ../../Mx-Browser/src/thread.cpp
+    ../../Mx-Browser/src/mxbrowser.cpp
 
 HEADERS += \
     ../../Mx-Browser/src/browserconfig.h \
@@ -24,7 +23,6 @@ HEADERS += \
     ../../Mx-Browser/src/dialog/query.h \
     ../../Mx-Browser/src/libbrowser.h \
     ../../Mx-Browser/src/mxbrowser.h \
-    ../../Mx-Browser/src/thread.h \
     ../../Mx-Browser/src/version.h \
     version.h
 
