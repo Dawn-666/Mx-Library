@@ -1,7 +1,7 @@
-QT += widgets network core5compat axcontainer gui-private
+QT += widgets network axcontainer gui-private #core5compat
 
 TEMPLATE = lib
-DEFINES += MICRO_CLIENT_LIBRARY IMPORT_BROWSER WIN32_LEAN_AND_MEAN
+DEFINES += MICRO_CLIENT_LIBRARY WIN32_LEAN_AND_MEAN IMPORT_BROWSER #IMPORT_QUAZIP
 
 CONFIG += c++17
 
@@ -70,8 +70,8 @@ FORMS += \
 
 INCLUDEPATH += \
     $$PWD/include \
-    $$PWD/include/quazip \
-    $$PWD/include/quazip/zlib \
+    #$$PWD/include/quazip \
+    #$$PWD/include/quazip/zlib \
     $$PWD/../../Mx-Activator \
     $$PWD/../../Mx-Browser \
     $$PWD/../../Mx-MicroClient
@@ -116,16 +116,16 @@ greaterThan(QT_MAJOR_VERSION, 5) {
         LIBS += -L$$PWD/lib/x64 -ldetours
 
         CONFIG(debug, debug|release) {
-            LIBS += -L$$PWD/lib/x64/msvc_64 -lquazipd -L$$PWD/../build/Mx-Browser-Library_Qt_6_4_2_MSVC2019_64bit/debug -lMx-Browser
-        } else: LIBS += -L$$PWD/lib/x64/msvc_64 -lquazip -L$$PWD/../build/Mx-Browser-Library_Qt_6_4_2_MSVC2019_64bit/release -lMx-Browser
+            LIBS += -L$$PWD/../build/Mx-Browser-Library_Qt_6_4_2_MSVC2019_64bit/debug -lMx-Browser #-L$$PWD/lib/x64/msvc_64 -lquazipd
+        } else: LIBS += -L$$PWD/../build/Mx-Browser-Library_Qt_6_4_2_MSVC2019_64bit/release -lMx-Browser #-L$$PWD/lib/x64/msvc_64 -lquazip
 
     } else {
 
         DEFINES += KIT_MINGW
 
         CONFIG(debug, debug|release) {
-            LIBS += -L$$PWD/lib/x64/mingw_64 -lquazipd -L$$PWD/../build/Mx-Browser-Library_Qt_6_4_2_MinGW_64_bit/debug -lMx-Browser
-        } else: LIBS += -L$$PWD/lib/x64/mingw_64 -lquazip -L$$PWD/../build/Mx-Browser-Library_Qt_6_4_2_MinGW_64_bit/release -lMx-Browser
+            LIBS += -L$$PWD/../build/Mx-Browser-Library_Qt_6_4_2_MinGW_64_bit/debug -lMx-Browser #-L$$PWD/lib/x64/mingw_64 -lquazipd
+        } else: LIBS += -L$$PWD/../build/Mx-Browser-Library_Qt_6_4_2_MinGW_64_bit/release -lMx-Browser #-L$$PWD/lib/x64/mingw_64 -lquazip
 
     }
 
