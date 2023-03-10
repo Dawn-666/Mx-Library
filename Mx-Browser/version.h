@@ -12,10 +12,10 @@
 
 #undef VER_INTERNALNAME_STR
 #undef VER_ORIGINALFILENAME_STR
-#if defined KIT_MINGW && defined KIT_QT6
+#ifdef VER_STANDARD
 #define VER_INTERNALNAME_STR        "明曦-查询器 " VER_PRODUCTVERSION_STR ".dll"
 #define VER_ORIGINALFILENAME_STR    "Mx-Browser.dll"
-#elif defined KIT_MINGW && defined KIT_QT5
+#elif VER_E
 #define VER_INTERNALNAME_STR        "明曦-查询器 " VER_PRODUCTVERSION_STR ".E.dll"
 #define VER_ORIGINALFILENAME_STR    "Mx-Browser E.dll"
 #else

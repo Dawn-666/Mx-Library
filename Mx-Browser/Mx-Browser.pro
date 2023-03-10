@@ -45,10 +45,12 @@ CONFIG(debug, debug|release) {
      DEFINES += DEBUG
 }
 
-contains(CONFIG, msvc) {
-    DEFINES += KIT_MSVC
-} else: DEFINES += KIT_MINGW
-
 greaterThan(QT_MAJOR_VERSION, 5) {
+
     DEFINES += KIT_QT6
-} else: DEFINES += KIT_QT5
+
+    contains(CONFIG, msvc) {
+        DEFINES += VER_PRO
+    } else: DEFINES += VER_STANDARD
+
+} else: DEFINES += KIT_QT5 VER_E
